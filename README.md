@@ -18,32 +18,46 @@ This PHP script is designed to download all font files referenced in a given CSS
 4. **Create ZIP File:**  
    Finally, all successfully downloaded fonts are zipped into a file named `fonts.zip`.
 
-## Configuration
+## Example Configuration
 
-Update the following variables in the script to match your environment:
+To use the script, follow these steps:
 
-- **`$cssUrl`**: The full URL to the CSS file containing the font references.
-- **`$baseUrl`**: The base URL of your website.
-- **`$themeDir`**: The relative path to the theme directory where the CSS file is located.
-- **`$zipFilePath`**: The name of the output ZIP file.
+1. **Access the Form:**  
+   Open `index.php` in a web browser to see the form.
 
-### Example Configuration
+2. **Fill in the Form:**
+   - **CSS File URL:** Enter the full URL to the CSS file that contains the font references. For example:
+     ```
+     https://domain-name.com/wp-content/themes/theme-name/fonts/fonts.css?ver=6.6.1
+     ```
+   - **Base Site URL:** Enter the base URL of your website. For example:
+     ```
+     https://domain-name.com
+     ```
+   - **Theme Name:** Enter the name of the WordPress theme you are using. The script will automatically prepend `wp-content/themes/` to this name. For example:
+     ```
+     theme-name
+     ```
 
-```php
-$cssUrl = 'https://your-domain.com/wp-content/themes/theme-name/fonts/fonts.css?ver=6.6.1';
-$baseUrl = 'https://your-domain.com';
-$themeDir = 'wp-content/themes/theme-name';
-$zipFilePath = 'fonts.zip';
+3. **Start Download:**
+   - Click the **"Start Download"** button to begin the process. The button will be disabled during the download.
+
+4. **Check Logs:**
+   - As the script processes, logs will appear below the form. Successful downloads will be shown in green, and failed attempts will be shown in red. 
+
+5. **Download ZIP File:**
+   - Once the download is complete, a link to download the ZIP file containing the fonts will appear in the logs. Click this link to download the ZIP file.
+
+### Example Form Input
+
+**CSS File URL:**  
 
 
-This configuration will download the fonts referenced in the fonts.css file from the "Hub" WordPress theme on the tabdil.com website and save them in a ZIP file named fonts.zip.
-Usage
 
-    Place the script in a PHP environment.
-    Configure the variables according to your needs.
-    Run the script.
+### Result
 
-The fonts will be downloaded and compressed into a ZIP archive in the same directory as the script.
-License
+After filling in the form and clicking the **"Start Download"** button, the script will process the CSS file, download the fonts, and package them into a ZIP file. The log area will show which fonts were successfully downloaded and which ones failed. Finally, a link to download the ZIP file will be provided.
+
+
 
 This project is licensed under the MIT License - see the LICENSE file for details.
