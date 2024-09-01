@@ -1,60 +1,34 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Downloader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-function getCssContent($cssUrl) {
-    $cssContent = @file_get_contents($cssUrl);
-    if ($cssContent === false) {
-        die("Error: Failed to retrieve CSS file from $cssUrl\n");
-    }
-    return $cssContent;
-}
+    <div class="container">
+        <h2>Font Downloader</h2>
+        <form id="fontForm">
+            <label for="cssUrl">CSS File URL:</label>
+            <input type="text" id="cssUrl" name="cssUrl" required placeholder="https://example.com/style.css">
+            
+            <label for="baseUrl">Base Site URL:</label>
+            <input type="text" id="baseUrl" name="baseUrl" required placeholder="https://example.com">
+            
+            <label for="themeName">Theme Name:</label>
+            <input type="text" id="themeName" name="themeName" required placeholder="theme-name">
 
-function findFontUrls($cssContent, $baseUrl, $themeDir) {
-    $fontUrls = [];
-    preg_match_all('/url\(["\']?(.*?)["\']?\)/', $cssContent, $matches);
+            <button type="submit" id="downloadButton">Start Download</button>
+        </form>
 
-    foreach ($matches[1] as $url) {
-        // Check if the URL is relative or absolute
-        if (parse_url($url, PHP_URL_SCHEME) === null) {
-            // Handle relative URLs
-            $url = rtrim($baseUrl, '/') . '/' . rtrim($themeDir, '/') . '/' . ltrim($url, '/');
-        } else {
-            $url = $url; // URL is absolute
-        }
-        $fontUrls[] = $url;
-    }
+        <div id="logContainer">
+            <h3>Logs</h3>
+            <div id="log"></div>
+        </div>
+    </div>
 
-    return array_unique($fontUrls); // Remove duplicate URLs
-}
-
-function downloadAndZipFonts($fontUrls, $zipFilePath) {
-    $zip = new ZipArchive();
-    
-    if ($zip->open($zipFilePath, ZipArchive::CREATE) !== TRUE) {
-        exit("Cannot open <$zipFilePath>\n");
-    }
-
-    foreach ($fontUrls as $fontUrl) {
-        $fontContent = @file_get_contents($fontUrl); // Use @ to suppress warnings
-        if ($fontContent !== false) {
-            $fontFileName = basename(parse_url($fontUrl, PHP_URL_PATH));
-            $zip->addFromString($fontFileName, $fontContent);
-        } else {
-            echo "Failed to download: $fontUrl\n";
-        }
-    }
-
-    $zip->close();
-}
-
-// FUll CSS link with site address and theme name
-$cssUrl = 'https://domain-name.com/wp-content/themes/theme-name/fonts/fonts.css?ver=6.6.1';
-$baseUrl = 'https://domain-name.com';
-$themeDir = 'wp-content/themes/theme-name/fonts';
-$zipFilePath = 'fonts.zip'; //Zip file name after grab fonts
-
-$cssContent = getCssContent($cssUrl);
-$fontUrls = findFontUrls($cssContent, $baseUrl, $themeDir);
-downloadAndZipFonts($fontUrls, $zipFilePath);
-
-echo "Fonts have been downloaded and zipped to $zipFilePath\n";
-?>
+    <script src="script.js"></script>
+</body>
+</html>
