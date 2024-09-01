@@ -47,11 +47,7 @@ To use the script, follow these steps:
 
 5. **Download ZIP File:**
    - Once the download is complete, a link to download the ZIP file containing the fonts will appear in the logs. Click this link to download the ZIP file.
-
-### Example Form Input
-
-**CSS File URL:**  
-
+ 
 
 
 ### Result
