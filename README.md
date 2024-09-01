@@ -34,3 +34,16 @@ $cssUrl = 'https://your-domain.com/wp-content/themes/theme-name/fonts/fonts.css?
 $baseUrl = 'https://your-domain.com';
 $themeDir = 'wp-content/themes/theme-name';
 $zipFilePath = 'fonts.zip';
+
+
+This configuration will download the fonts referenced in the fonts.css file from the "Hub" WordPress theme on the tabdil.com website and save them in a ZIP file named fonts.zip.
+Usage
+
+    Place the script in a PHP environment.
+    Configure the variables according to your needs.
+    Run the script.
+
+The fonts will be downloaded and compressed into a ZIP archive in the same directory as the script.
+License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
